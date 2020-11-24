@@ -1,19 +1,18 @@
 #!/usr/bin/env sh
 
 make_git_personal() {
-    path="."
+    repo_path="."
     if [ "$#" -ne "0" ]; then
-        path="$1"
+        repo_path=="$1"
     fi
-
-    git -C "$path" rev-parse
+    git -C "$repo_path" rev-parse
     if [ "$?" -ne "0" ]; then
         echo "Error: invalid git path"
         return 1
     fi
-    git -C $path config commit.gpgsign off
-    git -C $path config user.name "Reza Alizadeh Majd"
-    git -C $path config user.email "r.a.majd@gmail.com"
+    git -C $repo_path config commit.gpgsign off
+    git -C $repo_path config user.name "Reza Alizadeh Majd"
+    git -C $repo_path config user.email "r.a.majd@gmail.com"
     echo "DONE"
     return 0
 }
