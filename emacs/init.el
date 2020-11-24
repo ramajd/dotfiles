@@ -30,7 +30,7 @@
 (defvar myPackages
   '(better-defaults
     material-theme
-    ;;humanoid-themes
+    humanoid-themes
     use-package))
 
 (mapc #'(lambda (package)
