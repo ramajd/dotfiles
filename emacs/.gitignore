@@ -1,3 +1,5 @@
 elpa/
 transient/
 .recentf
+ido.last
+.cache/
