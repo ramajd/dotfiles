@@ -45,3 +45,8 @@
 ;; Python development
 ;;(elpy-enable)
 
+;; remote Guix access
+(require 'tramp)
+(setq tramp-remote-path
+      (append tramp-remote-path
+	      '(tramp-own-remote-path)))
