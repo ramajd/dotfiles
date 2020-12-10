@@ -10,6 +10,7 @@
 ;;(global-hl-line-mode t)
 (global-linum-mode t)
 (line-number-mode t)
+(setq column-number-mode t)
 ;;(add-hook 'window-setup-hook 'maximize-frame t)
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
@@ -41,6 +42,7 @@
 
 ;; Additional package definitions
 (load-file "~/.emacs.d/packages.el")
+(load-file "~/.emacs.d/blogging.el")
 
 ;; Python development
 ;;(elpy-enable)
