@@ -7,7 +7,7 @@
    '("8ca8fbaeaeff06ac803d7c42de1430b9765d22a439efc45b5ac572c2d9d09b16" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(initial-frame-alist '((fullscreen . maximized)))
  '(package-selected-packages
-   '(treemacs-magit treemacs-icons-dired treemacs-projectile treemacs elpy humanoid-themes material-theme company-jedi ac-geiser paredit smex ido-completing-read+ magit use-package company spacemacs-theme))
+   '(org2web org-static-blog treemacs-magit treemacs-icons-dired treemacs-projectile treemacs elpy humanoid-themes material-theme company-jedi ac-geiser paredit smex ido-completing-read+ magit use-package company spacemacs-theme))
  '(safe-local-variable-values
    '((eval modify-syntax-entry 43 "'")
      (eval modify-syntax-entry 36 "'")
