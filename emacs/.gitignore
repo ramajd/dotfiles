@@ -4,3 +4,6 @@ transient/
 ido.last
 .cache/
 el-get/
+
+elpy/
+irony/

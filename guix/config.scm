@@ -3,9 +3,10 @@
 
 (use-modules (gnu)
              (gnu packages certs)
+             (gnu packages fonts)
              (gnu packages kde-frameworks)
              (gnu packages gnome)
-	     (guix packages)
+	           (guix packages)
              (px packages accounts)
              (px packages desktop)
              (px services desktop)
@@ -94,8 +95,16 @@
                                                   "EndSection\n"
                                                   "\n"))))))
                    (service docker-service-type)
+                   (service elogind-service-type
+                            (elogind-configuration
+                             (idle-action 'suspend)
+                             (idle-action-seconds (* 60 5))))
+		   (service sysctl-service-type
+			    (sysctl-configuration
+			      (settings '(("fs.inotify.max_user_watches" . "524288")))))
                    (remove (lambda (svc)
-                             (or (eq? (service-kind svc) sddm-service-type)))
+                             (or (eq? (service-kind svc) sddm-service-type)
+                                 (eq? (service-kind svc) elogind-service-type)))
                            %pantherx-services)))
 
   ;; Allow resolution of '.local' host names with mDNS.
