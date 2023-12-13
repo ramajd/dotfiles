@@ -1,67 +1,55 @@
-;; remove help buffer
-(setq inhibit-startup-message t)
+;;
+;; straight.el initiation
+;;
+(setq package-enable-at-startup nil)
 
-;; hide top toolbar, menubar and scrollbar
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
+(package-initialize)
+(require 'package)
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+;; (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
-;; highlight current line
-;;(global-hl-line-mode t)
-(global-linum-mode t)
-(line-number-mode t)
-(setq column-number-mode t)
-;;(add-hook 'window-setup-hook 'maximize-frame t)
-(custom-set-variables
- '(initial-frame-alist (quote ((fullscreen . maximized)))))
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-;; just in macos
-; (seqt mac-command-modifier 'meta)
+(straight-use-package 'use-package)
+
+(eval-when-compile
+  (require 'use-package))
+
+(setq use-package-always-ensure t)
+(setq use-package-verbose t)
+(setq straight-use-package-by-default t)
 
 
+;;
+;; setup custom file
+;;
 (setq custom-file "~/.emacs.d/custom-file.el")
 (load-file custom-file)
 
-;; el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
 
+;;
+;; additional configurations
+;;
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-;; Packages
-(require 'package)
-(package-initialize)
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/") t)
-
-(defvar myPackages
-  '(better-defaults
-    material-theme
-    humanoid-themes
-    use-package))
-
-(mapc #'(lambda (package)
-	 (unless (package-installed-p package)
-	   (package-install package)))
-      myPackages)
-
-
-;; Additional package definitions
-(load-file "~/.emacs.d/packages.el")
-(load-file "~/.emacs.d/blogging.el")
-
-;; Python development
-;;(elpy-enable)
-
-;; remote Guix access
-(require 'tramp)
-(setq tramp-remote-path
-      (append tramp-remote-path
-	      '(tramp-own-remote-path)))
-
+(require 'init-ui-customizations)
+(require 'init-common)
+(require 'init-treemacs)
+(require 'init-projectile)
+(require 'init-magit)
+(require 'init-rust-mode)
