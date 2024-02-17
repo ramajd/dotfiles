@@ -53,3 +53,4 @@
 (require 'init-projectile)
 (require 'init-magit)
 (require 'init-rust-mode)
+(require 'init-blogging)
