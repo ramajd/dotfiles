@@ -9,6 +9,7 @@
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/saves" t)))
 
 (electric-pair-mode)
+(global-set-key (kbd "C-<tab>") 'other-window)
 
 (use-package package-lint)
 
