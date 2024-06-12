@@ -82,6 +82,6 @@
 			     "company.*" "ARev.*" "Org-roam.*")
 			   "\\|"))))
 
-(load-theme 'kaolin-galaxy t)
+(load-theme 'kaolin-ocean t)
 
 (provide 'init-ui-customizations)
