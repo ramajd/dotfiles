@@ -54,3 +54,4 @@
 (require 'init-magit)
 (require 'init-rust-mode)
 (require 'init-blogging)
+(require 'init-cpp-mode)
