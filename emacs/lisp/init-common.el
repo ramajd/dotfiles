@@ -37,5 +37,9 @@
         recentf-max-saved-items 1000
         recentf-save-file (concat user-emacs-directory ".recentf")))
 
+(defun eshell-new()
+  "Open a new instance of eshell."
+  (interactive)
+  (eshell 'N))
 
 (provide 'init-common)
