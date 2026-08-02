@@ -74,9 +74,9 @@
   :after treemacs magit
   :ensure t)
 
-(use-package treemacs-icons-dired
-  :after treemacs dired
+(use-package treemacs-all-the-icons
+  :after treemacs
   :ensure t
-  :config (treemacs-icons-dired-mode))
+  :config (treemacs-load-theme "all-the-icons"))
 
 (provide 'init-treemacs)
