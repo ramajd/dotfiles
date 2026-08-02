@@ -25,6 +25,9 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(add-to-list 'straight-built-in-pseudo-packages 'project)
+(add-to-list 'straight-built-in-pseudo-packages 'xref)
+
 (straight-use-package 'use-package)
 
 (eval-when-compile
