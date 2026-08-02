@@ -74,9 +74,33 @@
   :after treemacs magit
   :ensure t)
 
+;; treemacs-all-the-icons adds all-the-icons glyphs to the sidebar.
+;; The icon FONT must be installed or the glyphs render as broken boxes.
+;;
+;; At startup, detect whether the "all-the-icons" font is present on this
+;; system and, if it is missing, install it automatically.
+;; all-the-icons-install-fonts can prompt / hang in headless (batch) or
+;; terminal sessions, so only auto-install in a real graphical frame.
+(defun my-treemacs-ensure-icons-fonts ()
+  "Install the all-the-icons font if it is missing from this system."
+  (when (and (display-graphic-p)
+             (window-system))
+    (unless (member "all-the-icons" (font-family-list))
+      (condition-case err
+          (progn
+            (message "treemacs: all-the-icons font missing - installing...")
+            (all-the-icons-install-fonts t))   ; noninteractive download + install
+        (error
+         (message "treemacs: could not auto-install icon font: %s"
+                  (error-message-string err)))))))
+;; If the glyphs still look wrong after installing, rebuild the font set
+;; cache:  M-x all-the-icons-reload  then restart Emacs.
 (use-package treemacs-all-the-icons
   :after treemacs
   :ensure t
-  :config (treemacs-load-theme "all-the-icons"))
+  :config (progn
+            (require 'all-the-icons)
+            (my-treemacs-ensure-icons-fonts)
+            (treemacs-load-theme "all-the-icons")))
 
 (provide 'init-treemacs)
